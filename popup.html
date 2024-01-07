@@ -1,14 +1,60 @@
-<!-- popup.html -->
 <!DOCTYPE html>
 <html>
 
 <head>
     <title>HTTP Cats Scanner</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: transparent;
+            text-align: center;
+        }
+
+        .popup {
+            height: 256px;
+            width: 144px;
+            padding: 24px;
+            background-color: #f3f3f3;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .cat-img {
+            max-width: 100px;
+            height: auto;
+            display: block;
+            margin: 0 auto 15px;
+        }
+
+        p {
+            color: #222;
+            font-size: 18px;
+        }
+    </style>
 </head>
 
 <body>
-    <h1>HTTP Cats Scanner</h1>
-    <p>Meow</p>
+    <div class="popup" id="popup">
+        <h1>HTTP Cats Scanner</h1>
+        <img class="cat-img" src="icon128.png" alt="Cat Icon">
+        <p id="meow">Meow</p>
+    </div>
+
+    <script>
+        function colorInv(rgb) {
+            return rgb.map(c => 0xFF - c);
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const popup = document.getElementById('popup');
+            const bgColor = window.getComputedStyle(document.body).getPropertyValue('background-color');
+            popup.style.backgroundColor = bgColor;
+            console.log(bgColor);
+            let [rInv, bInv, gInv] = colorInv(bgColor.match(/\d+/g)); // why not
+            const inv_bg_color = new String(`rgb(${rInv}, ${bInv}, ${gInv})`);
+            document.getElementById('meow').style.color = inv_bg_color;
+        });
+    </script>
 </body>
 
 </html>
